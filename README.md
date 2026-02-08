@@ -418,7 +418,16 @@ Transcribes uploaded music files.
 1. "Help me practice the Alto part for Amazing Grace"
    → Watch the voice part appear with playable notation
 
-2. "Create a syncopated rhythm in 6/16 with dotted quavers"
+2. "Act as a Master Hymn Composer. Generate a traditional, solemn SATB & Organ arrangement for 'Happy Birthday' in Tonic Sol-fa notation.
+    Technical Requirements:
+    Key & Meter: G Major, 3/4 Time (starting on the up-beat/pick-up).
+    Harmony: Use traditional hymnody rules. Avoid parallel fifths. The Bass must provide a solid foundation using I, IV, and V chords.
+    Notation: Use standard Sol-fa with colons (:) for beats and dots (.) for half-beats. Ensure octave marks are correct (e.g., s, for low Sol, d' for high Do).
+   Organ Accompaniment: Provide an organTreble part that supports the Soprano/Alto and an organBass part with a heavy pedal line.
+   Output Specification: Return the data in a raw JSON block with the following keys: title, keySignature, soprano, alto, tenor, bass, organTreble, and organBass."
+   → See a simple sheet music rendered and hear accurate playback
+
+3. "Create a syncopated rhythm in 6/16 with dotted quavers"
    → See the rhythm rendered and hear accurate playback
 
 3. "Why does that chord progression sound so sad?"
