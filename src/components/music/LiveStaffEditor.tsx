@@ -201,14 +201,21 @@ Q:1/4=${currentTempo}
     return notes;
   }, []);
 
+  const [renderError, setRenderError] = useState<string | null>(null);
+
   useEffect(() => {
     if (containerRef.current) {
       containerRef.current.innerHTML = '';
+      setRenderError(null);
+      
       // Use full ABC notation if provided, otherwise generate from melody
       const abc = useFullAbc && abcNotation ? abcNotation : generateABC(melody, currentKey);
-      if (abc) {
+      
+      if (!abc || abc.trim() === '') {
+        // Show default empty staff
+        const defaultAbc = `X:1\nT:Your Composition\nK:${currentKey}\nM:${currentTimeSignature}\nL:1/4\n| z4 |]`;
         try {
-          abcjs.renderAbc(containerRef.current, abc, {
+          abcjs.renderAbc(containerRef.current, defaultAbc, {
             responsive: 'resize',
             add_classes: true,
             staffwidth: 600,
@@ -217,11 +224,45 @@ Q:1/4=${currentTempo}
             paddingbottom: 10,
           });
         } catch (error) {
-          console.error('ABC rendering error:', error);
+          console.error('ABC default rendering error:', error);
+          setRenderError('Unable to render staff. Please check your notation.');
+        }
+        return;
+      }
+      
+      try {
+        const result = abcjs.renderAbc(containerRef.current, abc, {
+          responsive: 'resize',
+          add_classes: true,
+          staffwidth: 600,
+          scale: 1.3,
+          paddingtop: 10,
+          paddingbottom: 10,
+        });
+        
+        // abcjs.renderAbc always returns an array, check if it has content
+        if (!result) {
+          setRenderError('Unable to render notation. Try simpler input like "C D E F".');
+        }
+      } catch (error) {
+        console.error('ABC rendering error:', error);
+        setRenderError('Notation error. Please check your input format.');
+        
+        // Try to render a fallback empty staff
+        try {
+          const fallbackAbc = `X:1\nT:Composition\nK:${currentKey}\nM:${currentTimeSignature}\nL:1/4\n| z4 |]`;
+          abcjs.renderAbc(containerRef.current, fallbackAbc, {
+            responsive: 'resize',
+            add_classes: true,
+            staffwidth: 600,
+            scale: 1.3,
+          });
+        } catch (fallbackError) {
+          console.error('Fallback rendering failed:', fallbackError);
         }
       }
     }
-  }, [melody, currentKey, generateABC, useFullAbc, abcNotation]);
+  }, [melody, currentKey, generateABC, useFullAbc, abcNotation, currentTimeSignature]);
 
   const handleMelodyChange = (value: string) => {
     setMelody(value);
@@ -441,11 +482,21 @@ Q:1/4=${currentTempo}
           </div>
 
           {/* Staff display */}
-          <div 
-            ref={containerRef} 
-            className="bg-white rounded-lg p-4 min-h-[120px] mb-4"
-            style={{ backgroundColor: '#ffffff', color: '#000000' }}
-          />
+          <div className="relative">
+            <div 
+              ref={containerRef} 
+              className="bg-white rounded-lg p-4 min-h-[120px] mb-4 overflow-hidden"
+              style={{ backgroundColor: '#ffffff', color: '#000000' }}
+            />
+            {renderError && (
+              <div className="absolute inset-0 flex items-center justify-center bg-background/90 rounded-lg">
+                <div className="text-center p-4">
+                  <p className="text-destructive text-sm">{renderError}</p>
+                  <p className="text-muted-foreground text-xs mt-2">Try: C D E F G A B c</p>
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Action buttons */}
           <div className="flex flex-wrap gap-2">
