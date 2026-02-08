@@ -106,6 +106,22 @@ Import existing music from various formats.
 
 ---
 
+## 🔌 Powered By
+
+<div align="center">
+
+| Technology | Role | Description |
+|:----------:|:----:|:------------|
+| ![Tambo](https://img.shields.io/badge/Tambo-Generative_UI-6366f1?style=flat-square) | **UI Framework** | Enables dynamic component rendering based on AI intent analysis |
+| ![abcjs](https://img.shields.io/badge/abcjs-Music_Notation-f59e0b?style=flat-square) | **Notation Engine** | Renders professional sheet music from ABC notation format |
+| ![Tone.js](https://img.shields.io/badge/Tone.js-Audio_Engine-22c55e?style=flat-square) | **Audio Synthesis** | Web Audio API wrapper for precise rhythmic playback |
+| ![Gemini](https://img.shields.io/badge/Gemini-AI_Brain-4285f4?style=flat-square&logo=google) | **AI Model** | Powers intent detection and music composition generation |
+| ![Lovable](https://img.shields.io/badge/Lovable-Rapid_Prototyping-ec4899?style=flat-square) | **Development** | AI-assisted rapid application development platform |
+
+</div>
+
+---
+
 ## 🏗️ Architecture
 
 ```
@@ -113,9 +129,9 @@ Import existing music from various formats.
 │                      Frontend (React)                        │
 ├─────────────────────────────────────────────────────────────┤
 │  MaestroChat.tsx                                             │
-│  ├─ User Input → Edge Function → AI Analysis                │
+│  ├─ User Input → Edge Function → Gemini AI Analysis         │
 │  ├─ Component Decision (panic-practice|composer|theory)     │
-│  └─ Dynamic Component Rendering                              │
+│  └─ Tambo-style Dynamic Component Rendering                  │
 ├─────────────────────────────────────────────────────────────┤
 │  Interactive Components                                      │
 │  ├─ PanicPracticeMode   → Voice part isolation + playback   │
@@ -127,14 +143,18 @@ Import existing music from various formats.
 │  ├─ useAudioEngine hook                                      │
 │  ├─ playMelodyWithDurations() ← Accurate rhythmic playback  │
 │  └─ parseAbcWithDurations() ← Duration extraction           │
+├─────────────────────────────────────────────────────────────┤
+│  Notation Rendering (abcjs)                                  │
+│  ├─ ABC notation → SVG staff rendering                       │
+│  └─ Multiple voice support (SATB)                            │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                   Backend (Supabase)                         │
+│                   Backend (Lovable Cloud)                    │
 ├─────────────────────────────────────────────────────────────┤
 │  Edge Functions                                              │
-│  ├─ maestro-chat        → AI intent analysis + tool calls   │
+│  ├─ maestro-chat        → Gemini AI intent + tool calls     │
 │  └─ process-music-sheet → OCR/AI transcription              │
 ├─────────────────────────────────────────────────────────────┤
 │  Database                                                    │
