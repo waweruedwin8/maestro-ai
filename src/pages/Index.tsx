@@ -44,7 +44,7 @@ const Index = () => {
             <span className="text-musical-gold">abcjs</span> •{' '}
             <span className="text-musical-blue">Tone.js</span>
           </p>
-          <p className="mt-1">The UI Strikes Back Hackathon 2025</p>
+          <p className="mt-1">The UI Strikes Back Hackathon 2026</p>
         </div>
       </footer>
     </div>
