@@ -1,0 +1,222 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Maestro AI Design System - Dark Musical Theme */
+
+@layer base {
+  :root {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 14%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 14%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 280 65% 60%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217 33% 20%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 45 93% 58%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 25%;
+    --input: 217 33% 25%;
+    --ring: 280 65% 60%;
+
+    --radius: 0.75rem;
+
+    /* Musical accent colors */
+    --musical-purple: 280 65% 60%;
+    --musical-blue: 210 80% 55%;
+    --musical-gold: 45 93% 58%;
+    --musical-teal: 175 60% 45%;
+    --musical-rose: 340 75% 55%;
+
+    /* Gradients */
+    --gradient-musical: linear-gradient(135deg, hsl(280 65% 60%), hsl(210 80% 55%));
+    --gradient-warm: linear-gradient(135deg, hsl(45 93% 58%), hsl(340 75% 55%));
+    --gradient-dark: linear-gradient(180deg, hsl(222 47% 11%), hsl(222 47% 8%));
+
+    /* Shadows */
+    --shadow-glow: 0 0 30px -5px hsl(280 65% 60% / 0.4);
+    --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.5);
+
+    --sidebar-background: 222 47% 9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 280 65% 60%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 20%;
+    --sidebar-ring: 280 65% 60%;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 14%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 14%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 280 65% 60%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217 33% 20%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 45 93% 58%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 25%;
+    --input: 217 33% 25%;
+    --ring: 280 65% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Staff lines background pattern */
+  .staff-pattern {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 11px,
+      hsl(var(--border) / 0.3) 11px,
+      hsl(var(--border) / 0.3) 12px
+    );
+    background-size: 100% 60px;
+    background-position: 0 10px;
+  }
+}
+
+/* Custom scrollbar */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted-foreground));
+  }
+
+  /* Musical glow effects */
+  .glow-primary {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .gradient-musical {
+    background: var(--gradient-musical);
+  }
+
+  .gradient-warm {
+    background: var(--gradient-warm);
+  }
+
+  /* Piano key styles */
+  .piano-white-key {
+    @apply bg-white hover:bg-gray-100 active:bg-gray-200 border border-gray-300 rounded-b-md;
+    transition: all 0.1s ease;
+  }
+
+  .piano-white-key.active {
+    @apply bg-primary/20;
+  }
+
+  .piano-black-key {
+    @apply bg-gray-900 hover:bg-gray-800 active:bg-gray-700 rounded-b-md;
+    transition: all 0.1s ease;
+  }
+
+  .piano-black-key.active {
+    @apply bg-primary;
+  }
+
+  /* Sheet music container */
+  .sheet-music-container svg {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .sheet-music-container .abcjs-note {
+    cursor: pointer;
+  }
+
+  .sheet-music-container .abcjs-note:hover {
+    fill: hsl(var(--primary));
+  }
+
+  /* Metronome pulse */
+  @keyframes metronome-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.8;
+    }
+  }
+
+  .metronome-pulse {
+    animation: metronome-pulse 0.1s ease-out;
+  }
+
+  /* Chat message animation */
+  @keyframes message-slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .message-enter {
+    animation: message-slide-in 0.3s ease-out;
+  }
+}
