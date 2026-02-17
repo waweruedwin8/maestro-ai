@@ -54,7 +54,7 @@ Maestro AI provides a conversational interface that:
 
 ## 🌐 Live Demo
 
-**Preview URL:** [https://id-preview--9de30b64-7e49-4aee-89ca-908de6ea0a61.lovable.app](https://id-preview--9de30b64-7e49-4aee-89ca-908de6ea0a61.lovable.app)
+**Preview URL:** [https://maestro-ai-studio-v30.lovable.app)
 
 ### Demo Walkthrough for Judges
 
